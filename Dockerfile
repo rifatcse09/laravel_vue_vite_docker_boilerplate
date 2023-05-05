@@ -68,9 +68,6 @@ COPY composer.lock composer.json /var/www/html/
 # Copy package.json and package-lock.json into the image
 #COPY package*.json /var/www/html
 
-# Copy the node_modules directory into the image
-#COPY --from=node node_modules /var/www/html
-
 # Set working directory
 WORKDIR /var/www/html/
 
