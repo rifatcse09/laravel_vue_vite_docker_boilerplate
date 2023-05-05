@@ -31,7 +31,14 @@ services:
       - "9001:9000"
     networks:
       - webapp
-
+  npm:
+    image: node:16
+    container_name: ${APP_NAME}_npm
+    user: "1000:1000"
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: ['npm']
 
   #Mysql DB
   mysql:

@@ -53,11 +53,7 @@ RUN set -eux; \
     php -r 'var_dump(gd_info());'
 
 # Install Node.js and npm
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs
-
-# Install Yarn
-RUN npm install -g yarn
+#RUN apt-get update && apt-get install -y nodejs npm
 
 # Install composer (php package manager)
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -68,5 +64,14 @@ COPY composer.lock composer.json /var/www/html/
 # Set working directory
 WORKDIR /var/www/html/
 
-# Copy existing application directory contents to the working directory
-COPY . /var/www/html
+ADD . /var/www/html
+
+# Set ownership and permissions for the storage directory
+RUN chown -R www-data:www-data /var/www/html/storage
+RUN chmod -R 775 /var/www/html/storage
+
+# Set ownership and permissions for the laravel.log file
+RUN chown www-data:www-data /var/www/html/storage/logs/laravel.log
+RUN chmod 664 /var/www/html/storage/logs/laravel.log
+
+
