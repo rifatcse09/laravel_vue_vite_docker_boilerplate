@@ -74,14 +74,13 @@ WORKDIR /var/www/html/
 COPY . /var/www/html
 
 # Set ownership and permissions for the storage directory
+USER root
 RUN chown -R www-data:www-data /var/www/html/storage
 RUN chmod -R 775 /var/www/html/storage
+USER www-data
 
 # Set ownership and permissions for the laravel.log file
 RUN chown www-data:www-data /var/www/html/storage/logs/laravel.log
 RUN chmod 664 /var/www/html/storage/logs/laravel.log
-
-Refferecn
-https://github.com/nimatrazmjo/laravel-vuejs-docker/blob/main/Dockerfile.prod
 
 

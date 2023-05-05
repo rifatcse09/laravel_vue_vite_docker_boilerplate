@@ -34,3 +34,6 @@ Docker development implementation for Laravel 8.\* with:
 ## Contributing
 
 You can contribute to this project by following this documentation.
+
+#Refferecn
+- https://github.com/nimatrazmjo/laravel-vuejs-docker/blob/main/Dockerfile.prod
