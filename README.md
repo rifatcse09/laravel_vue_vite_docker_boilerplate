@@ -7,6 +7,7 @@ Docker development implementation for Laravel 8.\* with:
 - PHP8.2
 - Vue
 - Node
+- Reddis
 
 ## Installation
 
@@ -25,6 +26,9 @@ Docker development implementation for Laravel 8.\* with:
 - Install javascript dependencies: `npm install`
 - Compile the assets: `yarn dev` / `yarn watch`  / `dcoker-compose run npm run dev`
 - You can access the project at: `http://localhost:8000`
+- or
+- Install composer dependencies: `docker-compose run php composer install`
+- Install javascript dependencies: `docker-compose run npm install`
 
 
 ## Contributing

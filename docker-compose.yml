@@ -58,6 +58,14 @@ services:
     networks:
       - webapp
 
+  redis:
+    image: redis:4.0
+    container_name: ${APP_NAME}_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - webapp
+
 volumes:
   mysql:
     driver: local

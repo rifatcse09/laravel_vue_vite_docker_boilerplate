@@ -6,6 +6,8 @@
 
 FROM php:8.2-fpm
 
+LABEL authors="Rifat"
+
 # Set Environment Variables
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -24,6 +26,8 @@ RUN set -eux; \
     apt-get upgrade -y; \
     apt-get install -y --no-install-recommends \
             curl \
+            zip \
+            unzip \
             libmemcached-dev \
             libz-dev \
             libpq-dev \
@@ -53,7 +57,7 @@ RUN set -eux; \
     php -r 'var_dump(gd_info());'
 
 # Install Node.js and npm
-#RUN apt-get update && apt-get install -y nodejs npm
+RUN apt-get update && apt-get install -y nodejs npm
 
 # Install composer (php package manager)
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -61,10 +65,16 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copy composer.lock and composer.json into the working directory
 COPY composer.lock composer.json /var/www/html/
 
+# Copy package.json and package-lock.json into the image
+#COPY package*.json /var/www/html
+
+# Copy the node_modules directory into the image
+#COPY --from=node node_modules /var/www/html
+
 # Set working directory
 WORKDIR /var/www/html/
 
-ADD . /var/www/html
+COPY . /var/www/html
 
 # Set ownership and permissions for the storage directory
 RUN chown -R www-data:www-data /var/www/html/storage
@@ -73,5 +83,8 @@ RUN chmod -R 775 /var/www/html/storage
 # Set ownership and permissions for the laravel.log file
 RUN chown www-data:www-data /var/www/html/storage/logs/laravel.log
 RUN chmod 664 /var/www/html/storage/logs/laravel.log
+
+Refferecn
+https://github.com/nimatrazmjo/laravel-vuejs-docker/blob/main/Dockerfile.prod
 
 
